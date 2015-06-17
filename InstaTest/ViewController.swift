@@ -45,8 +45,7 @@ class ViewController: UIViewController {
         if let url = NSURL(string: strURL) {
             let task = session.dataTaskWithURL(url) {(data, _, error) in
                 if let error = error {
-                    
-                    println(error)
+                     println(error)
                 } else {
                     let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary
                     self.arrayMedia.extend(json.valueForKey("data") as! [NSDictionary])
@@ -100,6 +99,7 @@ class ViewController: UIViewController {
         loadData()
     }
 }
+
 
 extension ViewController: UITableViewDataSource {
     
