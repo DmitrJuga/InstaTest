@@ -49,14 +49,19 @@ class ViewController: UIViewController {
                 } else {
                     let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary
                     self.arrayMedia.extend(json.valueForKey("data") as! [NSDictionary])
-                    self.arrayMedia.sort{
-                        let a = $0.0.valueForKeyPath("likes.count")?.integerValue
-                        let b = $0.1.valueForKeyPath("likes.count")?.integerValue
-                        return a > b
-                    }
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.indicator.hidden = true
-                        self.reloadUI()
+                    if let nextURL = json.valueForKeyPath("pagination.next_url") as? String {
+                        //println(nextURL)
+                        self.loadPage(nextURL)
+                    } else {
+                        self.arrayMedia.sort{
+                            let a = $0.0.valueForKeyPath("likes.count")?.integerValue
+                            let b = $0.1.valueForKeyPath("likes.count")?.integerValue
+                            return a > b
+                        }
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.indicator.hidden = true
+                            self.reloadUI()
+                        }
                     }
                 }
             }
@@ -114,6 +119,12 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
+extension ViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+}
 
 extension ViewController: LoginDelegate {
     

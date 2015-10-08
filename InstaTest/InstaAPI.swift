@@ -10,16 +10,14 @@ import Foundation
 
  struct InstaAPI {
 
-    static let ClientId = "58fa042c8bcc4051890aaa1d1dd00c5d"
-    static let RedirectURI = "http://itisyourlikes.ru"
-    static let RedirectURIWithToken = "http://itisyourlikes.ru/#access_token="
+    static let clientID = "653fea9f3a084befa44fe62b32ac9902"
+    static let redirectURI = "http://bestphoto.com"
     
-    static let authURL = "https://instagram.com/oauth/authorize/?client_id={@1}&redirect_uri={@2}&response_type=token"
+    static let authURL = "https://instagram.com/oauth/authorize/?client_id=%@&redirect_uri=%@&response_type=token"
     static let urlLogin = "https://instagram.com/accounts/login/?"
     static let urlLogout = "https://instagram.com/accounts/logout"
     
-    static let myUrl = "https://api.instagram.com/v1/tags/{@1}/media/recent?access_token={@2}"
-    static let urlSelfMedia = "https://api.instagram.com/v1/users/self/media/recent"
+    static let urlGetSelfMedia = "https://api.instagram.com/v1/users/self/media/recent"
     
     static var authAccessToken: String {
         get {
